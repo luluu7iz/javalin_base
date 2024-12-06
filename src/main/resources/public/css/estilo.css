@@ -1,10 +1,10 @@
 body {
-    background-color: powderblue;
+    background-color: rgba(0, 0, 0, 0);
     margin: auto;
     text-align: center;
     align-items: center;
-    
 }
+
 h1 {
-    color: blue;
+    color: rgb(255, 0, 0);
 }
