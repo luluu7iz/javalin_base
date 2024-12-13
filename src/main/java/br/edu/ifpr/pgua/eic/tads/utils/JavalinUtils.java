@@ -11,27 +11,21 @@ import io.javalin.http.staticfiles.Location;
 import io.javalin.rendering.template.JavalinFreemarker;
 import io.javalin.rendering.template.JavalinPebble;
 
-
 public class JavalinUtils {
-    
-    public static Javalin makeApp(int port){
-        
-        
-        
-        
-        Javalin app = Javalin.create(config->{
+
+    public static Javalin makeApp(int port) {
+
+        Javalin app = Javalin.create(config -> {
             Configuration conf = new Configuration(Configuration.VERSION_2_3_33);
             conf.setClassForTemplateLoading(JavalinUtils.class, "/public");
             config.fileRenderer(new JavalinFreemarker(conf));
             config.requestLogger.http((ctx, ms) -> {
-                System.out.println(ctx.method() +" "+ ctx.fullUrl());
+                System.out.println(ctx.method() + " " + ctx.fullUrl());
             });
-            config.staticFiles.add("public",Location.CLASSPATH);
-            
+            config.staticFiles.add("public", Location.CLASSPATH);
+
         }).start(port);
         return app;
     }
 
-
 }
-

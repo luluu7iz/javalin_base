@@ -1,33 +1,37 @@
 package br.edu.ifpr.pgua.eic.tads.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import br.edu.ifpr.pgua.eic.tads.models.Cadastro;
+import br.edu.ifpr.pgua.eic.tads.models.Pessoa;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
-import java.util.Map;
-import java.util.HashMap;
 
 public class CadastroController {
 
     private Cadastro cadastro;
 
-    public CadastroController(Cadastro cadastro){
+    public CadastroController(Cadastro cadastro) {
         this.cadastro = cadastro;
     }
-    
-    public Handler get = (Context ctx)-> {
+
+    public Handler get = (Context ctx) -> {
         ctx.render("cadastro.html");
     };
 
-    public Handler post = (Context ctx)-> {
+    public Handler post = (Context ctx) -> {
         String nome = ctx.formParam("nome");
-        String cpf = ctx.formParam("cpf");
-   
-        cadastro.add(new Pessoa(nome, cpf));
+        String email = ctx.formParam("email");
+        String telefone = ctx.formParam("telefone");
 
-        Map<String,Object> dados = new HashMap<>();
+        cadastro.add(new Pessoa(nome, email, telefone));
 
-        dados.put("pessoas",cadastro.getPessoas());
-        
-        ctx.render("resposta.html",dados);
+        Map<String, Object> dados = new HashMap<>();
+
+        dados.put("mensagem", "Cadastro realizado!");
+
+        ctx.render("cadastro.html", dados);
 
     };
 }
